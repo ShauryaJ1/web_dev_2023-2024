@@ -1,0 +1,43 @@
+.lines-wrapper {
+    background-color: gainsboro;
+    width:600px;
+    height: 600px;
+    
+  }
+  .p-wrapper{
+      text-align:center;
+      color: black;
+  }
+  .instructions-wrapper{
+      align-content: right;
+      text-align: right;
+      color:black;
+  }
+  #top-left-box:hover{
+      fill: gray;
+      
+  }
+  #top-middle-box:hover{
+      fill: gray;
+  }
+  #top-right-box:hover{
+      fill: gray;
+  }
+  #middle-left-box:hover{
+      fill: gray;
+  }
+  #middle-middle-box:hover{
+      fill: gray;
+  }
+  #middle-right-box:hover{
+      fill: gray;
+  }
+  #bottom-left-box:hover{
+      fill: gray;
+  }
+  #bottom-middle-box:hover{
+      fill: gray;
+  }
+  #bottom-right-box:hover{
+      fill: gray;
+  }

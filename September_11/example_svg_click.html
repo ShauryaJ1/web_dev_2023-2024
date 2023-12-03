@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG Placement</title>
+</head>
+<body>
+    <div id="svgContainer">Stuff</div>
+    <script>
+        document.body.addEventListener('click', function(event) {
+    // Get the click coordinates
+    const x = event.clientX;
+    const y = event.clientY;
+
+    // Fetch the SVG content from an external source (Google Fonts)
+    fetch('circle_FILL0_wght400_GRAD0_opsz24.svg')
+        .then(response => response.text())
+        .then(svgContent => {
+            // Create an SVG element
+            const svgElement = document.createElement('div');
+            svgElement.innerHTML = svgContent;
+
+            // Set the position of the SVG element
+            svgElement.style.position = 'absolute';
+            svgElement.style.left = x + 'px';
+            svgElement.style.top = y + 'px';
+
+            // Append the SVG to the container
+            document.getElementById('svgContainer').appendChild(svgElement);
+        })
+        .catch(error => {
+            console.error('Error fetching SVG:', error);
+        });
+});
+
+    </script>
+</body>
+</html>

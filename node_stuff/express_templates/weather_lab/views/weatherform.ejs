@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Form</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333333;
+        }
+        form{
+            border: 3px solid #121212;
+            margin: 0 auto;
+            width: 50%;
+            padding: 1em;
+            margin-bottom: 1em;
+            background-color: rgb(76, 171, 153);
+        }
+        label{
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        input[type=text]{
+            width: 100%;
+            padding: 0.5em;
+        }
+        input[type=submit]{
+            width: 100%;
+            padding: 0.5em;
+            background-color: #121212;
+            color: #f5f5f5;
+            border: none;
+        }
+    </style>
+    <form action="destination" method="GET">
+        <label for="latitude">Enter a latitude:</label>
+        <input type="text" name="latitude" id="latitude">
+        <label for="longitude">Enter a longitude</label>
+        <input type="text" name="longitude" id="longitude">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+</head>
+<body>
+    <h1>The count of the page: <%= count %></h1>
+    <br>
+    <h2><a href= <%= next %>>Visit the next page</a></h2>
+    <h2><a href= <%= previous %>>Visit the previous page</a></h2>
+    <h2><a href= <%= url %>>Current page URL</a></h2>
+
+    <h3>Date <%= date %></h3>
+    <h3>Day type: <%= day_type %></h3>
+
+    <div id="blocks_to_show" style="display:flex">
+        <div id="block" style="background-color: black; color:white;display:inline-block; width: 100px;">
+            <h4><%= block_names[0]%></h4>
+            <h4><%= block_starts[0]%></h4>
+            <br>
+            <h4><%= block_ends[0]%></h4>
+
+        </div>
+        <br>
+        <div id="block" style="background-color: black; color:white;display:inline-block; width: 100px;">
+            <h4><%= block_names[1]%></h4>
+            <h4><%= block_starts[1]%></h4>
+            <br>
+            <h4><%= block_ends[1]%></h4>
+
+        </div>
+        <br>
+        <div id="block" style="background-color: black; color:white;display:inline-block; width: 100px;">
+            <h4><%= block_names[2]%></h4>
+            <h4><%= block_starts[2]%></h4>
+            <br>
+            <h4><%= block_ends[2]%></h4>
+
+        </div>
+        <br>
+        <div id="block" style="background-color: black; color:white;display:inline-block; width: 100px;">
+            <h4><%= block_names[3]%></h4>
+            <h4><%= block_starts[3]%></h4>
+            <br>
+            <h4><%= block_ends[3]%></h4>
+
+        </div>
+        <br>
+        <div id="block" style="background-color: black; color:white;display:inline-block; width: fit-content;">
+            <h4><%= block_names[4]%></h4>
+            <h4><%= block_starts[4]%></h4>
+            <br>
+            <h4><%= block_ends[4]%></h4>
+
+        </div>
+        <br>
+    </div>
+
+</body>
+</html>

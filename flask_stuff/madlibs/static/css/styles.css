@@ -1,0 +1,19 @@
+#home_background{
+    background-color: #9A69D8;
+}
+#text_white{
+    color: whitesmoke;
+}
+#text_white_heading{
+    color: whitesmoke;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#madlibs_body{
+    color:grey;
+}
+#madlibs_text{
+    color:white
+}
+#large{
+    font-size: large;
+}

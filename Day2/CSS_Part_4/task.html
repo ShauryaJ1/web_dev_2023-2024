@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    h1{
+        color:red;
+    }
+    p > a{
+        color:cyan;
+    }
+    
+    .special-paragraph > a{
+        color: orange;       
+        text-decoration: underline; 
+    }
+    .special-paragraph{
+        font-family: 'Courier New', Courier, monospace;
+    }
+    #my-list li {
+    color: blue;       
+    font-style: italic;  
+    }
+    mark:hover {
+    background-color: yellow;  /* Change background color to yellow */
+    color: black;              /* Change text color to black */
+    font-weight: bold;         /* Apply bold font weight */
+    }
+</style>
+<body>
+    
+    <h1 >On this page, I have some information about planets</h1>
+    <h2 class="description">Planets are cool!</h2>
+    <div id="div1">
+        <p>Mars is the <span id="span_yellow">fourth planet</span>and the furthest terrestrial planet from the Sun. The reddish color of its surface is due to finely grained iron(III) oxide dust in the soil, giving it the nickname "the Red Planet". Mars's radius is second smallest among the planets in the Solar System at 3,389.5 km.</p>
+    </div>
+    <div id="div2">
+        <p>Mercury is the <span id="span_yellow">first planet</span> from the Sun and the smallest planet in the Solar System. It is a terrestrial planet with a heavily cratered surface due to the planet having no geological activity and an extremely tenuous atmosphere.</p>
+    </div>
+    <div id="div3">
+        <p>Jupiter is the <span id="span_yellow">fifth planet</span> from the Sun and the  <span id="span_green">largest</span> in the Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined, and slightly less than one one-thousandth the mass of the Sun.</p>
+    </div>
+    <p>
+    <a class = "big" href="https://www.britannica.com/topic/list-of-planets-2058004">List of Planets</a>
+    <div>
+    <p class="special-paragraph">
+    <a href="https://solarsystem.nasa.gov/planets/dwarf-planets/pluto/overview/">Pluto</a>
+    
+    </p>
+    </div>
+    <div>
+        <ol id="my-list">
+            <li >
+                <mark>
+
+                Mercury
+                </mark>
+            </li>
+            <li >Venus</li>
+            <li >Earth</li>
+        </ol>
+    </div>
+
+</body>
+</html>

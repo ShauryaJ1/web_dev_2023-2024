@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC-TAC-TOE</title>
+    <link rel="stylesheet" href="static\css\ttt_styles.css">
+    
+</head>
+<body>
+    
+    <button id="reset_button">
+        reset
+    </button>
+
+    <div class="p-wrapper">
+        <h1>
+            TIC-TAC-TOE
+        </h1>
+        <h2 id="winner_heading"></h2>
+    
+    </div>
+        <div class="lines-wrapper">
+            <svg viewBox="0 0 600 600">
+                <line x1="200" y1=0 x2="200" y2="600" stroke-width="4" stroke="black"/>
+                <line x1="400" y1=0 x2="400" y2="600" stroke-width="4" stroke="black"/>
+                <line x1="0" y1=200 x2="600" y2="200" stroke-width="4" stroke="black"/>
+                <line x1="0" y1=400 x2="600" y2="400" stroke-width="4" stroke="black"/>
+                <g id="top-left">
+                    <rect id="top-left-box" x="25" y="25" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="top-left-circle" cx="100" cy="100" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="top-left-cross" style="visibility:hidden">
+                        <line x1="50" y1=50 x2="150" y2="150" stroke-width="4" stroke="white"/>
+                        <line x1="150" y1=50 x2="50" y2="150" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="top-middle">
+                    <rect id="top-middle-box" x="225" y="25" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="top-middle-circle" cx="300" cy="100" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="top-middle-cross" style="visibility:hidden">
+                        <line x1="250" y1=50 x2="350" y2="150" stroke-width="4" stroke="white"/>
+                        <line x1="350" y1=50 x2="250" y2="150" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="top-right">
+                    <rect id="top-right-box" x="425" y="25" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="top-right-circle" cx="500" cy="100" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="top-right-cross" style="visibility:hidden">
+                        <line x1="450" y1=50 x2="550" y2="150" stroke-width="4" stroke="white"/>
+                        <line x1="550" y1=50 x2="450" y2="150" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="middle-left">
+                    <rect id="middle-left-box"x="25" y="225" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="middle-left-circle" cx="100" cy="300" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="middle-left-cross" style="visibility:hidden">
+                        <line x1="50" y1=250 x2="150" y2="350" stroke-width="4" stroke="white"/>
+                        <line x1="150" y1=250 x2="50" y2="350" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="middle-middle">
+                    <rect id="middle-middle-box" x="225" y="225" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="middle-middle-circle" cx="300" cy="300" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="middle-middle-cross" style="visibility:hidden">
+                        <line x1="250" y1=250 x2="350" y2="350" stroke-width="4" stroke="white"/>
+                        <line x1="350" y1=250 x2="250" y2="350" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="bottom-middle">
+                    <rect id="bottom-middle-box"x="225" y="425" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="bottom-middle-circle" cx="300" cy="500" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="bottom-middle-cross" style="visibility:hidden">
+                        <line x1="250" y1=450 x2="350" y2="550" stroke-width="4" stroke="white"/>
+                        <line x1="350" y1=450 x2="250" y2="550" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="middle-right">
+                    <rect id="middle-right-box"x="425" y="225" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="middle-right-circle" cx="500" cy="300" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="middle-right-cross" style="visibility:hidden">
+                        <line x1="450" y1=250 x2="550" y2="350" stroke-width="4" stroke="white"/>
+                        <line x1="550" y1=250 x2="450" y2="350" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="bottom-left">
+                    <rect id="bottom-left-box" x="25" y="425" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="bottom-left-circle" cx="100" cy="500" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="bottom-left-cross" style="visibility:hidden">
+                        <line x1="50" y1=450 x2="150" y2="550" stroke-width="4" stroke="white"/>
+                        <line x1="150" y1=450 x2="50" y2="550" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+                <g id="bottom-right">
+                    <rect id="bottom-right-box" x="425" y="425" width="150" height="150" stroke="black" fill="black"/>
+                    <circle id="bottom-right-circle" cx="500" cy="500" r="50" stroke="black" fill="white" visibility="hidden"/>
+                    <g id="bottom-right-cross" style="visibility:hidden">
+                        <line x1="450" y1=450 x2="550" y2="550" stroke-width="4" stroke="white"/>
+                        <line x1="550" y1=450 x2="450" y2="550" stroke-width="4" stroke="white"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    
+    <script type="text/javascript" src="static\js\ttt_script.js"></script>
+
+    
+        
+        
+        
+        
+
+</body>
+</html>
