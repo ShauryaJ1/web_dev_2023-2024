@@ -33,13 +33,13 @@ CREATE TABLE quest (
     quest_name TEXT NOT NULL
 );
 CREATE TABLE assigned_equipment (
-    c_id INTEGER,
-    equipment_id INTEGER
+    c_name TEXT NOT NULL,
+    equipment_name TEXT NOT NULL
     
 );
 CREATE TABLE assigned_quests (
-    c_id INTEGER,
-    quest_id INTEGER
+    c_name TEXT NOT NULL,
+    quest_name TEXT NOT NULL
 );
 
 INSERT into equipment

@@ -6,17 +6,27 @@
     <title>Form</title>
 </head>
 <body>
-    <ul> Choose from one of the following options
+    <ul> Choose from one of the following quests
         <li>kill the dragon</li>
         <li>save the princess</li>
         <li>find the treasure</li>
         <li>defeat the evil wizard</li>
         <li>find the magic sword</li>
     </ul>
+    <ul> Choose from one of the following characters
+        <li>Archibald</li>
+        <li>Henrik</li>
+        <li>Isadore</li>        
+        <li>Lucinda</li>
+        <li>Dominic</li>
+    </ul>
     <form action = "heroStats" method="GET">
 
         <label for="quests">Add quests</label>
         <input type="text" name="quests" id="quests"> 
+        <br>
+        <label for="character">For Character</label>
+        <input type="text" name="character" id="character"> 
         <input type="submit" value="Submit">
     </form>
 </body>
