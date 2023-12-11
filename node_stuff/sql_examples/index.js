@@ -1,15 +1,16 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('database.db');
-function sqlPromise(query) {
+function sqlPromise(query, params =[]) {
     return new Promise( (resolve,reject) => {
-      db.all(query, (err,rows) => {
+      db.all(query, params,(err,rows) => {
         if (err) reject(err);
+        
         resolve(rows);
       })
     })
   }
 
-// let sql = `SELECT * FROM characters WHERE c_name = ?`
+let sql = `SELECT * FROM assigned_quests`
 // let sql2 = `SELECT * FROM equipment WHERE equipment_id = ?`
 // let sql3 = `SELECT * FROM quest WHERE quest_id = ?`
 // let params1 = ['Henrik']
@@ -42,24 +43,32 @@ app.get('/questForm',(req,res)=>{
     res.render('questForm')
 })
 
-app.get('/heroStats',(req,res)=>{
+app.get('/heroStats',async (req,res)=>{
     equipment = 'none'
     quests = 'none'
     character = 'NA'
-    let query1 = `UPDATE assigned_equipment SET c_strength= WHERE c_name='Archibald'`
-    let query2 = `UPDATE assigned_quests SET c_strength= WHERE c_name='Archibald'`
-        quests = req.query.quests
-
-    
-    if('equipment' in req.query){
-        equipment = req.query.equipment
-    }
+    let query1 = `INSERT INTO assigned_equipment VALUES (?,?)`
+    let query2 = `INSERT INTO assigned_quests VALUES (?,?)`
+    result = {}
     if('character' in req.query){
         character = req.query.character
     }
-    render_dict = {'quests':quests,'equipment':equipment,'character':character}
+    if ('quests' in req.query){
 
-    res.render('heroStats')
+        quests = req.query.quests;
+        result = await sqlPromise(query2,[character,quests])
+        db.all(sql,  (err, rows) => {
+            //     console.log(err)
+                console.log(rows);
+            });
+    }
+    if('equipment' in req.query){
+        equipment = req.query.equipment
+    }
+    
+    const render_dict = {'quests':quests,'equipment':equipment,'character':character,'result':result}
+
+    res.render('heroStats',render_dict)
 })
 
 app.get('/equipmentForm',(req,res)=>{

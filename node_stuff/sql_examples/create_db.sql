@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS characters;
-
+DROP TABLE IF EXISTS equipment;
+DROP TABLE IF EXISTS quest;
+DROP TABLE IF EXISTS assigned_equipment;
+DROP TABLE IF EXISTS assigned_quests;
 CREATE TABLE characters (
     c_id INTEGER PRIMARY KEY,
     c_name TEXT NOT NULL,
