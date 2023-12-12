@@ -1,0 +1,2 @@
+Initially, heroStats will be empty
+As you add more equipments and quests, heroStats will grow in size and display each hero's quests and equipments

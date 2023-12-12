@@ -6,17 +6,70 @@
     <title>Hero Stats</title>
 </head>
 <body>
+    <style>
+        body{
+            background-color: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333333;
+        }
+        h1{
+            text-align: center;
+            font-size: 3em;
+            margin: 0;
+        }
+        h2{
+            text-align: center;
+            font-size: 2em;
+            margin: 0;
+        }
+        h3{
+            text-align: center;
+            font-size: 1.5em;
+            margin: 0;
+        }
+        h4{
+            text-align: center;
+            font-size: 1.2em;
+            margin: 0;
+        }
+        p{
+            text-align: center;
+            font-size: 1em;
+            margin: 0;
+        }
+        a{
+            text-align: center;
+            font-size: 1em;
+            margin: 0;
+        }
+        div{
+            border: 3px solid #121212;
+            margin: 0 auto;
+            width: 50%;
+            padding: 1em;
+            margin-bottom: 1em;
+            background-color: rgb(76, 171, 153);
+            
+        }
+    </style>
     <h1>Quest added for <%= character %>: <%= quests %></h1>
     <h1>Equipment added for <%= character %>: <%= equipment %></h1>
-    <h1><%= result%></h1>
-    <ul>
-        <li>
-        </li>
-        <li>
-        </li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+    
+    <%for(r in result){%>
+        <!-- <%= result[r]%> -->
+        <div>
+            
+            <p>For the character: <%= result[r]['c_name']%></p>
+            <p>Quest: <%= result[r]['quest_name']%></p>
+            <p>Equipment: <%= result[r]['equipment_name']%></p>
+            <p>Wit: <%= result[r]['c_wit']%></p>
+            <p>Strength: <%= result[r]['c_strength']%></p>
+            <p>Attack: <%= result[r]['c_attack']%></p>
+            <p>Defense: <%= result[r]['c_defense']%></p>
+            <p>Magic: <%= result[r]['c_magic']%></p>
+            
+        </div>
+        <br>
+    <%}%>
 </body>
 </html>
