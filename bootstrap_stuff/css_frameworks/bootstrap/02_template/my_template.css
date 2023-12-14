@@ -1,0 +1,13 @@
+body {
+  padding-top: 5rem;
+}
+.my-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.my-boxed-element {
+	border:1px;
+	border-style:solid;
+	border-color:#AAAAAA;
+	padding: 1em;"
+}
