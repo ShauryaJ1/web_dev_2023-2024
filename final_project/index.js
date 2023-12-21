@@ -7,9 +7,6 @@ var request = require('request');
 var query = 'https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?apiKey=CXVpx6cCok93NKqjvvb7WSZwiwNG1wdd'
 app.get('/',(req,res)=>{
     
-
-  // replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-  var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=GOOG&interval=5min&apikey=WHP0R3AGKQ3KTWPI';
   
   request.get({
       url: query,

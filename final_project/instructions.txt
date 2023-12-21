@@ -1,0 +1,4 @@
+1. Look at api.txt for the api keys
+2. npm install express
+3. npm install request
+4. npm install chart.js

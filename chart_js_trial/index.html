@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CHART PAGE</h1>
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','Black'],
+            datasets: [{
+              label: '# of Votes!',
+              data: [12, 19, 3, 5, 2, 3,50],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Chart.js Line Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:5,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:10,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                }
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+      </script>
+      
+</body>
+</html>
