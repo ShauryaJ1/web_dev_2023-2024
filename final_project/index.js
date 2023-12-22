@@ -5,6 +5,9 @@ var request = require('request');
 
 let my_json = {}
 var simple_query = 'https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?apiKey=CXVpx6cCok93NKqjvvb7WSZwiwNG1wdd'
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+days_of_the_week = ['Sunday','Monday','Tuesday','Wednesday',"Thursday",'Friday','Saturday']
+weekdays = days_of_the_week.slice(1,6)
 var query = 'https://api.polygon.io/v2/aggs/ticker/'
 app.get('/stock',(req,res,next)=>{
     
@@ -108,8 +111,8 @@ app.get('/stockResults',(req,res,next)=>{
   sDate = new Date(res.locals.render_dict['startDate'])
   eDate = new Date(res.locals.render_dict['endDate'])
   day_difference = Number((eDate.getTime()-sDate.getTime())/(1000*60*60*24))
+  console.log(day_difference)
   for (e in res.locals.render_dict['data']){
-    console.log(e)
     res.locals.render_dict['volumes'].push(my_json['results'][e]['v'])
     res.locals.render_dict['volumes_weighted'].push(my_json['results'][e]['vw'])
     res.locals.render_dict['opens'].push(my_json['results'][e]['o'])
@@ -124,8 +127,15 @@ app.get('/stockResults',(req,res,next)=>{
   }
   else{
     nextDate = new Date(res.locals.render_dict['startDate'])
-    for(let i = 0;i<day_difference;i++){
-      res.locals.render_dict['dates'].push(nextDate.toString())
+    nextDate.setDate(nextDate.getDate()+1)
+    console.log(months[nextDate.getMonth()])
+    // console.log(nextDate.getMonth())
+
+    // console.log(nextDate.toString())
+    for(let i = 0;i<=day_difference;i++){
+      if(weekdays.includes(days_of_the_week[nextDate.getDay()])){
+      res.locals.render_dict['dates'].push(days_of_the_week[nextDate.getDay()]+' '+ months[nextDate.getMonth()] +' '+ nextDate.getDate()+' '+nextDate.getFullYear())
+      }
       nextDate.setDate(nextDate.getDate()+1)
     }
 

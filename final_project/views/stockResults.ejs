@@ -33,13 +33,558 @@
           </div>
         </div>
       </nav>
-      <ul>
-        <li><%= startDate %></li>
-        <li><%= endDate %></li>
-        <li><%= stockTicker %></li>
-        <li><%= data %></li>
-      </ul>
+      <h1 class="d-flex">Stock Data for <%= stockTicker %> from <%= startDate %> to <%= endDate %></h1>
+      <br>
+      
+      <div class="container-sm accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              Volumes
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <canvas id="volumesChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Volumes Weighted
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <canvas id="volumes_weightedChart"></canvas>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Opens
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse show">
+              <div class="accordion-body">
+                <canvas id="opensChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              Transactions
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <canvas id="transactionsChart"></canvas>
+            </div>
+          </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              Lows
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <canvas id="lowsChart"></canvas>
+            </div>
+          </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+              Highs
+            </button>
+          </h2>
+          <div id="collapseSix" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <canvas id="highsChart"></canvas>
+            </div>
+          </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+              Close
+            </button>
+          </h2>
+          <div id="collapseSeven" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <canvas id="closeChart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <script>
+        var dates =<%- JSON.stringify(dates)%>;
+        var volumes =<%- JSON.stringify(volumes)%>;
+        var volumes_weighted =<%- JSON.stringify(volumes_weighted)%>;
+        var opens =<%- JSON.stringify(opens)%>;
+        var transactions =<%- JSON.stringify(transactions)%>;
+        var lows =<%- JSON.stringify(lows)%>;
+        var highs =<%- JSON.stringify(highs)%>;
+        var close =<%- JSON.stringify(close)%>;
+        
+        console.log('hello')
+        console.log(dates)
+        const volumesChart = document.getElementById('volumesChart')
+        const volumes_weightedChart = document.getElementById('volumes_weightedChart')
+        const opensChart = document.getElementById('opensChart')
+        const transactionsChart = document.getElementById('transactionsChart')
+        const lowsChart = document.getElementById('lowsChart')
+        const highsChart = document.getElementById('highsChart')
+        const closeChart = document.getElementById('closeChart')
+        new Chart(volumesChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Trading Volume',
+              fill:{target:'origin',below:'#32a852'},
+              data: volumes,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Volumes Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                },
+                
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...volumes),
+                max: 1.1*Math.max(...volumes)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
 
+
+        new Chart(volumes_weightedChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Trading Volume Weighted',
+              fill:{target:'origin',below:'#32a852'},
+              data: volumes_weighted,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Volumes Weighted Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...volumes_weighted),
+                max: 1.1*Math.max(...volumes_weighted)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+
+
+        new Chart(opensChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Open Price',
+              fill:{target:'origin',below:'#32a852'},
+              data: opens,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Open Prices Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...opens),
+                max: 1.1*Math.max(...opens)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+
+        new Chart(transactionsChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Transactions',
+              fill:{target:'origin',below:'#32a852'},
+              data: transactions,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Transactions Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...transactions),
+                max: 1.1*Math.max(...transactions)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+        new Chart(lowsChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Lows',
+              fill:{target:'origin',below:'#32a852'},
+              data: lows,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Lows Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...lows),
+                max: 1.1*Math.max(...lows)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+        new Chart(highsChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Highs',
+              fill:{target:'origin',below:'#32a852'},
+              data: highs,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Highs Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...highs),
+                max: 1.1*Math.max(...highs)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+        new Chart(closeChart, {
+          type: 'line',
+          data: {
+            labels: dates,
+            datasets: [{
+              label: 'Close',
+              fill:{target:'origin',below:'#32a852'},
+              data: close,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins:{
+                title:{
+                    color:'#36A2EB',
+                    display:true,
+                    text:'Close Chart'
+                },
+                legend: {
+                display: false,
+                 labels: {
+                color: '#32a852', // Set the color of the dataset label
+                boxWidth: 20,       // Set the width of the colored box
+                padding: 10         // Set padding between the label and the box
+                }
+            }
+            
+        },
+            elements:{
+                point:{
+                    radius:2,
+                    pointStyle:'rectRot',
+                    rotation:45,
+                    backgroundColor:'#32a852',
+                    borderWidth:1,
+                    hoverRadius:3,
+                }
+            },
+            scales: {
+              y: {
+                type:'linear',
+                beginAtZero: true,
+                position: 'right',
+                ticks:{
+                    color:'#36A2EB'
+                },
+                border: {
+                    color:'#36A2EB',
+                    width:2,
+                },
+                min: 0.9*Math.min(...close),
+                max: 1.1*Math.max(...close)
+              },
+              x: {
+                ticks:{
+                    color:'#36A2EB'
+                },
+                }
+              }
+            }
+          }
+        );
+      </script>
 </body>
 </html>
