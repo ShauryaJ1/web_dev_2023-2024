@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.set('view engine', 'ejs')
 
-app.get('/setcookie', (req, res) => {
+app.get('/cookiecounter', (req, res) => {
 
     // Set the 'username' cookie to expire in 7 days (in ms)
     const expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); 
