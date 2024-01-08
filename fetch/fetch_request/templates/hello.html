@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+  <h3>WEB Grade</h3>
+  <p id='WEB'></p>
+  <button type="button" onclick="doTheFetch()">PRESS ME</button>
+
+
+
+  <script>
+    async function doTheFetch() {
+        const response = await fetch('http://127.0.0.1/grades')
+        const data = await response.json()
+        let counter_span = document.getElementById("WEB")
+        counter_span.innerHTML = data.WEB;
+    }    
+  </script>
+</body>
+</html>
