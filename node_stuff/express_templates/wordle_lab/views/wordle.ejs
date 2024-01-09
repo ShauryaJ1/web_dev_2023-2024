@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+</head>
+<body>
+    <div id="wordle">
+        <svg viewBox="0 0 500 100">
+            <rect id="box-1" x="0" y="0" width="100" height="100" stroke="black" fill="white"/>
+            
+        </svg>
+    </div>
+    <form>
+        <label for="word">Enter a word:</label>
+        <input type="text" name="word" id="word">
+        <input type="submit" onclick = "doTheFetch()"value="Submit">
+    </form>
+    <script>
+        async function doTheFetch() {
+            const word = document.getElementById('word').value
+            const response = await fetch('http://127.0.0.1/wordle?word='+word)
+            const data = await response.json()
+            // let counter_span = document.getElementById(class_name)
+            // counter_span.innerHTML = data[class_name];
+
+        }    
+      </script>
+</body>
+</html>
