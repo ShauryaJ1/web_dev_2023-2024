@@ -6,7 +6,7 @@
     <title>Wordle</title>
 </head>
 <body>
-    <div id="wordle">
+    <!-- <div id="wordle">
         <svg viewBox="0 0 500 100">
             <rect id="box-0" x="0" y="0" width="100" height="100" stroke="black" fill="white"/>
             <text id = "text-0" x="50" y="50"></text>
@@ -20,7 +20,11 @@
             <text id = "text-4" x="450" y="50"></text>
 
         </svg>
-    </div>
+    </div> -->
+    <h1>Possible green words</h1>
+    <p id="result-green"></p>
+    <h1>Possible yellow words</h1>
+    <p id="result-yellow"></p>
     <form id="wordleForm">
         <label for="word">Enter a word:</label>
         <input type="text" name="word" id="word">
@@ -41,26 +45,28 @@
             const data = await response.json()
             // const data = await response.text()
             console.log(data)
-            let box_0 = document.getElementById('box-0')
-            let box_1 = document.getElementById('box-1')
-            let box_2 = document.getElementById('box-2')
-            let box_3 = document.getElementById('box-3')
-            let box_4 = document.getElementById('box-4')
-            let text_0 = document.getElementById('text-0')
-            let text_1 = document.getElementById('text-1')
-            let text_2 = document.getElementById('text-2')
-            let text_3 = document.getElementById('text-3')
-            let text_4 = document.getElementById('text-4')
-            text_0.innerHTML = data['word'][0]
-            text_1.innerHTML = data['word'][1]
-            text_2.innerHTML = data['word'][2]
-            text_3.innerHTML = data['word'][3]
-            text_4.innerHTML = data['word'][4]
-            box_0.style.fill = data[0]
-            box_1.style.fill = data[1]
-            box_2.style.fill = data[2]
-            box_3.style.fill = data[3]
-            box_4.style.fill = data[4]
+            document.getElementById('result-green').innerHTML = data['possible_green_words']
+            document.getElementById('result-yellow').innerHTML = data['possible_yellow_words']
+            // let box_0 = document.getElementById('box-0')
+            // let box_1 = document.getElementById('box-1')
+            // let box_2 = document.getElementById('box-2')
+            // let box_3 = document.getElementById('box-3')
+            // let box_4 = document.getElementById('box-4')
+            // let text_0 = document.getElementById('text-0')
+            // let text_1 = document.getElementById('text-1')
+            // let text_2 = document.getElementById('text-2')
+            // let text_3 = document.getElementById('text-3')
+            // let text_4 = document.getElementById('text-4')
+            // text_0.innerHTML = data['word'][0]
+            // text_1.innerHTML = data['word'][1]
+            // text_2.innerHTML = data['word'][2]
+            // text_3.innerHTML = data['word'][3]
+            // text_4.innerHTML = data['word'][4]
+            // box_0.style.fill = data[0]
+            // box_1.style.fill = data[1]
+            // box_2.style.fill = data[2]
+            // box_3.style.fill = data[3]
+            // box_4.style.fill = data[4]
         
             // let counter_span = document.getElementById(class_name)
             // counter_span.innerHTML = data[class_name];
