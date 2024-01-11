@@ -8,20 +8,60 @@
 <body>
     <div id="wordle">
         <svg viewBox="0 0 500 100">
-            <rect id="box-1" x="0" y="0" width="100" height="100" stroke="black" fill="white"/>
-            
+            <rect id="box-0" x="0" y="0" width="100" height="100" stroke="black" fill="white"/>
+            <text id = "text-0" x="50" y="50"></text>
+            <rect id="box-1" x="100" y="0" width="100" height="100" stroke="black" fill="white"/>
+            <text id = "text-1" x="150" y="50"></text>
+            <rect id="box-2" x="200" y="0" width="100" height="100" stroke="black" fill="white"/>
+            <text id = "text-2" x="250" y="50"></text>
+            <rect id="box-3" x="300" y="0" width="100" height="100" stroke="black" fill="white"/>
+            <text id = "text-3" x="350" y="50"></text>
+            <rect id="box-4" x="400" y="0" width="100" height="100" stroke="black" fill="white"/>
+            <text id = "text-4" x="450" y="50"></text>
+
         </svg>
     </div>
-    <form>
+    <form id="wordleForm">
         <label for="word">Enter a word:</label>
         <input type="text" name="word" id="word">
-        <input type="submit" onclick = "doTheFetch()"value="Submit">
+        <!-- <input type="submit" onclick = "doTheFetch()" value="Submit"> -->
+        <!-- <input type="submit" value="Submit"> -->
+        <button type="submit" onclick = "doTheFetch(event)" id = "button-1"> Submit </button>
+        <!-- <button></button> -->
     </form>
     <script>
-        async function doTheFetch() {
+        // document.getElementById('wordleForm').addEventListener('submit', doTheFetch(event))
+        async function doTheFetch(event) {
+            event.preventDefault()
+            // const formData = FormData(event.target)
+            // console.log(formData)
             const word = document.getElementById('word').value
-            const response = await fetch('http://127.0.0.1/wordle?word='+word)
+            console.log(word)
+            const response = await fetch('http://localhost:8080/wordle?word=' + word)
             const data = await response.json()
+            // const data = await response.text()
+            console.log(data)
+            let box_0 = document.getElementById('box-0')
+            let box_1 = document.getElementById('box-1')
+            let box_2 = document.getElementById('box-2')
+            let box_3 = document.getElementById('box-3')
+            let box_4 = document.getElementById('box-4')
+            let text_0 = document.getElementById('text-0')
+            let text_1 = document.getElementById('text-1')
+            let text_2 = document.getElementById('text-2')
+            let text_3 = document.getElementById('text-3')
+            let text_4 = document.getElementById('text-4')
+            text_0.innerHTML = data['word'][0]
+            text_1.innerHTML = data['word'][1]
+            text_2.innerHTML = data['word'][2]
+            text_3.innerHTML = data['word'][3]
+            text_4.innerHTML = data['word'][4]
+            box_0.style.fill = data[0]
+            box_1.style.fill = data[1]
+            box_2.style.fill = data[2]
+            box_3.style.fill = data[3]
+            box_4.style.fill = data[4]
+        
             // let counter_span = document.getElementById(class_name)
             // counter_span.innerHTML = data[class_name];
 

@@ -10,6 +10,7 @@ const wordsFilePath = path.join(__dirname,'enable1.txt')
 const words = fs.readFileSync(wordsFilePath).toString().split('\n')
 let filtered_words = words.filter( (elem) => elem.length == 5)
 let current_word = filtered_words[(Math.floor(Math.random() * filtered_words.length))]
+console.log(current_word)
 // (words is now an array of the entire enable1.txt file)
 // make it so that the wordle route accepts a query, that you can send from the fetch request
 app.set('view engine','ejs')
@@ -19,6 +20,7 @@ app.get('/',(req,res)=>{
 })
 app.get('/wordle',(req,res)=>{
     let wordle_word = ''
+    console.log('landed')
     dict_word = {0:'white',1:'white',2:'white',3:'white',4:'white'}
     if ('word' in req.query){
         wordle_word = req.query.word
@@ -36,6 +38,8 @@ app.get('/wordle',(req,res)=>{
         }
     }
     dict_word['word'] = wordle_word
+    console.log(dict_word)
+    
     res.json(dict_word)
 })
 
