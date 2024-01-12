@@ -1,6 +1,24 @@
 const express = require('express')
 const app = express()
 app.set('view engine', 'ejs')
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('database.db');
+function sqlPromise(query, params =[]) {
+    return new Promise( (resolve,reject) => {
+      db.all(query, params,(err,rows) => {
+        if (err) reject(err);
+        
+        resolve(rows);
+      })
+    })
+  }
+var tracked_stocks = []
+
+let stockInsertQuery = `INSERT INTO stocks VALUES (?,?,?)`
+let stockDeleteQuery = `DELETE FROM stocks WHERE stockTicker=?`
+
+
+
 var request = require('request');
 
 let my_json = {}
@@ -66,6 +84,7 @@ app.get('/stockResults',(req,res,next)=>{
   if('stockTicker' in req.query) {
     stockTicker = req.query.stockTicker
   }
+  
   res.locals.render_dict = {
     'endDate':endDate,
     'startDate':startDate,
@@ -98,7 +117,7 @@ app.get('/stockResults',(req,res,next)=>{
 }
 
 );
-},(req,res)=>{
+},async (req,res)=>{
   res.locals.render_dict['data'] = my_json['results']
   res.locals.render_dict['volumes'] = []
   res.locals.render_dict['volumes_weighted'] = []
@@ -141,6 +160,20 @@ app.get('/stockResults',(req,res,next)=>{
 
   }
   console.log(res.locals.render_dict)
+  if('track' in req.query){
+    if(req.query.track =='track' && tracked_stocks.indexOf(res.locals.render_dict['stockTicker'])==-1){
+      result = await sqlPromise(stockInsertQuery,[res.locals.render_dict['stockTicker'],res.locals.render_dict['startDate'],res.locals.render_dict['close'][0]])
+      
+      tracked_stocks.push(res.locals.render_dict['stockTicker'])
+      console.log(result)
+      console.log(tracked_stocks)
+    }
+    if (req.query.track=='untrack'){
+      console.log('untracked')
+      result = await sqlPromise(stockDeleteQuery,[res.locals.render_dict['stockTicker']])
+      delete tracked_stocks[tracked_stocks.indexOf(res.locals.render_dict['stockTicker'])]
+    }
+  }
   res.render('stockResults.ejs',res.locals.render_dict)
 
 }
