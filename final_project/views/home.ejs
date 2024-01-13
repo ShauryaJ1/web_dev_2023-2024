@@ -35,7 +35,36 @@
           </div>
         </div>
       </nav>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <br>
+      
+      <div class="container">
+        <div class="row" id="cards">
+          <%for(var i=0;i<result.length;i++){%>
+            <div class="col-md-3 p-2">
+              <div class="card border-dark border-3">
+                <div class="card-body">
+                  <h5 class="card-title"><%=result[i]['stockTicker']%></h5>
+                  <p class="card-text">Tracking stock since <%=result[i]['startDate']%></p>
+                  <a href=<%=links[i]%> class="btn btn-dark btn-sm active" role="button" aria-pressed="true">Visit for more information</a>
+                </div>
+                
+              </div>
+            </div>
 
+          <%}%>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
+<!-- 
+<div class="col-md-3">
+  <div class="card border-dark border-3">
+    <div class="card-body">
+      <h5 class="card-title">Card 2</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href='about' class="btn btn-dark btn-sm active" role="button" aria-pressed="true">Primary link</a>
+    </div>
+    
+  </div>
+</div> -->

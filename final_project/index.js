@@ -13,10 +13,10 @@ function sqlPromise(query, params =[]) {
     })
   }
 var tracked_stocks = []
-
+months_needing_one = ['0','1','2','3','4','5','6','7','8']
 let stockInsertQuery = `INSERT INTO stocks VALUES (?,?,?)`
 let stockDeleteQuery = `DELETE FROM stocks WHERE stockTicker=?`
-
+let selectAllQuery = `SELECT * FROM stocks`
 
 
 var request = require('request');
@@ -61,8 +61,35 @@ app.get('/stock',(req,res,next)=>{
 
   )
 
-app.get('/',(req,res)=>{
-  res.render('home.ejs')
+app.get('/',async (req,res)=>{
+  links = []
+  result = await sqlPromise(selectAllQuery)
+  console.log(result)
+  let dateObj = new Date();
+  dateObj.setDate(dateObj.getDate() - 1);
+  yesterdayDate = dateObj.getFullYear()+'-'
+  if (months_needing_one.indexOf(dateObj.getMonth().toString())==-1){
+    
+    
+    yesterdayDate+=(parseInt(dateObj.getMonth())+1).toString()
+  }
+  else{
+    yesterdayDate+='0'+(parseInt(dateObj.getMonth())+1).toString()
+    
+  }
+  if (dateObj.getDate().length<2){
+    yesterdayDate+='-0'+dateObj.getDate()
+  }
+  else{
+    yesterdayDate+='-'+dateObj.getDate()
+  }
+  render_dict = {'result':result,'yesterday':yesterdayDate}
+  for(var i=0;i<result.length;i++){
+    links.push('/stockResults?stockTicker='+result[i]['stockTicker']+'&startDate='+result[i]['startDate']+'&endDate='+yesterdayDate+'&track=')
+  }
+  render_dict['links'] = links
+  console.log(links)
+  res.render('home.ejs',render_dict)
 })
 app.get('/about',(req,res)=>{
   res.render('about.ejs')
