@@ -14,7 +14,7 @@ function sqlPromise(query, params =[]) {
   }
 var tracked_stocks = []
 months_needing_one = ['0','1','2','3','4','5','6','7','8']
-let stockInsertQuery = `INSERT INTO stocks VALUES (?,?,?)`
+let stockInsertQuery = `INSERT INTO stocks VALUES (?,?,?,?)`
 let stockDeleteQuery = `DELETE FROM stocks WHERE stockTicker=?`
 let selectAllQuery = `SELECT * FROM stocks`
 
@@ -27,6 +27,11 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 days_of_the_week = ['Sunday','Monday','Tuesday','Wednesday',"Thursday",'Friday','Saturday']
 weekdays = days_of_the_week.slice(1,6)
 var query = 'https://api.polygon.io/v2/aggs/ticker/'
+app.get('/analytics',(req,res,next)=>{
+  
+
+  res.render('analytics.ejs')
+})
 app.get('/stock',(req,res,next)=>{
     
   
@@ -101,6 +106,7 @@ app.get('/stockResults',(req,res,next)=>{
   let startDate = ''
   let endDate = ''
   let stockTicker = ''
+  let numberOfShares = ''
   console.log(req.query)
   if('startDate' in req.query) {
     startDate = req.query.startDate
@@ -111,11 +117,14 @@ app.get('/stockResults',(req,res,next)=>{
   if('stockTicker' in req.query) {
     stockTicker = req.query.stockTicker
   }
-  
+  if('shares' in req.query) {
+    numberOfShares = req.query.shares
+  }
   res.locals.render_dict = {
     'endDate':endDate,
     'startDate':startDate,
-    'stockTicker':stockTicker
+    'stockTicker':stockTicker,
+    'shares':parseInt(numberOfShares)
   }
   console.log(res.locals.render_dict)
   new_query = query + stockTicker + '/range/1/day/'+ startDate +'/'+ endDate + '?adjusted=true&sort=asc&limit=5000&apiKey=CXVpx6cCok93NKqjvvb7WSZwiwNG1wdd'
@@ -189,7 +198,7 @@ app.get('/stockResults',(req,res,next)=>{
   console.log(res.locals.render_dict)
   if('track' in req.query){
     if(req.query.track =='track' && tracked_stocks.indexOf(res.locals.render_dict['stockTicker'])==-1){
-      result = await sqlPromise(stockInsertQuery,[res.locals.render_dict['stockTicker'],res.locals.render_dict['startDate'],res.locals.render_dict['close'][0]])
+      result = await sqlPromise(stockInsertQuery,[res.locals.render_dict['stockTicker'],res.locals.render_dict['startDate'],res.locals.render_dict['close'][0],res.locals.render_dict['shares']])
       
       tracked_stocks.push(res.locals.render_dict['stockTicker'])
       console.log(result)
