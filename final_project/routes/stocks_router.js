@@ -234,7 +234,7 @@ stocks_router.get('/',async (req,res)=>{
   }
   render_dict = {'result':result,'yesterday':yesterdayDate}
   for(var i=0;i<result.length;i++){
-    links.push('/stockResults?stockTicker='+result[i]['stockTicker']+'&startDate='+result[i]['startDate']+'&endDate='+yesterdayDate+'&track=')
+    links.push('/stockResults?stockTicker='+result[i]['stockTicker']+'&startDate='+result[i]['startDate']+'&endDate='+yesterdayDate+'&track=' + '&shares=' + result[i]['shares'] )
   }
   render_dict['links'] = links
   console.log(links)

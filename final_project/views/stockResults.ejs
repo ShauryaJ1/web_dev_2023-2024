@@ -145,23 +145,20 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
       <script>
         async function doTheFetch(){
+                startDate = <%- JSON.stringify(startDate) %>
                 endDate = <%- JSON.stringify(endDate) %>
+                stockTicker = <%- JSON.stringify(stockTicker) %>
                 startClose = 0
                 endClose = 0
-                shares = 0
-                const response = await fetch('http://localhost:8080/forDBFetching')
-                const data = await response.json()
-                console.log(data)
-                for(var i=0;i<data['result'].length;i++){
-                    if(data['result'][i]['stockTicker']==='<%= stockTicker %>'){
-                        response2 = await fetch('http://localhost:8080'+'/stockResultsFetch?stockTicker='+data['result'][i]['stockTicker']+'&startDate='+data['result'][i]['startDate']+'&endDate='+ endDate +'&track=')
-                        const data2 = await response2.json()
-                        console.log(data2)
-                        startClose = data2['close'][0]
-                        endClose = data2['close'][data2['close'].length-1]
-                        shares = data['result'][i]['shares']
-                    }
-                }
+                shares = <%- JSON.stringify(shares) %>;
+                // const response = await fetch('http://localhost:8080/forDBFetching')
+                // const data = await response.json()
+                // console.log(data)
+                response2 = await fetch('http://localhost:8080'+'/stockResultsFetch?stockTicker='+stockTicker+'&startDate='+startDate+'&endDate='+ endDate +'&track='+ '&shares=' + shares)
+                const data2 = await response2.json()
+                console.log(data2)
+                startClose = data2['close'][0]
+                endClose = data2['close'][data2['close'].length-1]
                 document.getElementById("startInvestment").innerHTML = startClose*parseInt(shares)
                 document.getElementById("endInvestment").innerHTML = endClose*parseInt(shares)
                 if(startClose===0 || shares===0){
