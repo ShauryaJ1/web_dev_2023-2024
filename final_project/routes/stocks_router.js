@@ -1,5 +1,6 @@
 const express = require('express')
 // const stocks_router = express()
+const apikey = ''
 // stocks_router.set('view engine', 'ejs')
 const stocks_router = express.Router()
 const sqlite3 = require('sqlite3').verbose();
@@ -122,7 +123,7 @@ stocks_router.get('/stockResultsFetch',(req,res,next)=>{
     'shares':parseInt(numberOfShares)
   }
   console.log(res.locals.render_dict)
-  new_query = query + stockTicker + '/range/1/day/'+ startDate +'/'+ endDate + '?adjusted=true&sort=asc&limit=5000&apiKey=CXVpx6cCok93NKqjvvb7WSZwiwNG1wdd'
+  new_query = query + stockTicker + '/range/1/day/'+ startDate +'/'+ endDate + '?adjusted=true&sort=asc&limit=5000&apiKey=' + apikey
   console.log(new_query)
   request.get({
     url: new_query,
@@ -271,7 +272,7 @@ stocks_router.get('/stockResults',(req,res,next)=>{
     'shares':parseInt(numberOfShares)
   }
   console.log(res.locals.render_dict)
-  new_query = query + stockTicker + '/range/1/day/'+ startDate +'/'+ endDate + '?adjusted=true&sort=asc&limit=5000&apiKey=CXVpx6cCok93NKqjvvb7WSZwiwNG1wdd'
+  new_query = query + stockTicker + '/range/1/day/'+ startDate +'/'+ endDate + '?adjusted=true&sort=asc&limit=5000&apiKey'+apikey
   console.log(new_query)
   request.get({
     url: new_query,
